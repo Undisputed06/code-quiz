@@ -10,81 +10,17 @@
     --purple-highlight: rgb(203, 195, 227);
   }
 
-body {
-    font-family: "Poppins", sans-serif;
+header {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 200px;
 }
 
 h1 {
-    color: white;
-    text-align: center; 
+    margin-top: 20px;
 }
 
-li {
-    list-style: none; 
-}
-
-.top-bar {
-    display:flex;
-    justify-content: space-between;
-}
-
-/* Outer Container */
-.outer-container {
-    padding: 10px;
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: start;
-}
-
-.inner-container {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    background-color: black;
-    height: 100%;
-    margin: 0 auto;
-    width: 50%;
-}
-
-.quiz-into {
-    margin-bottom: 50vh;
-}
-
-.quiz-intro p {
-    text-align: center;
-}
-
-.quiz-intro button {
-    display: block;
-    margin: 0 auto;
-}
-
-.quiz-intro, main {
-    margin-bottom: 30vh;
-    margin-left: 10%;
-    margin-right: 10%;
-    background-color: aqua;
-}
-
-.question-screen {
-    display: none; 
-}
-
-.quiz-finish-screen {
-    display: none; 
-}
-
-main {
-    display: block;
-}
-
-p{
-    color: var(--color-white);
-    font-size: 1.3em;
-}
-
-button {
+header button {
     outline: none;
     background-color: white;
     color: #BF40BF;
@@ -92,13 +28,47 @@ button {
     border: none;
 }
 
-main {
-    display: none; 
+#container {
+    width: 50%;
+    margin: 0 auto;
+    border: solid;
+    text-align: center;
 }
 
-.highscores-screen {
+#start {
+    margin: 0 auto;
+}
+
+#start p {
+    font-size: 22px;
+    line-height: 1.5;
+}
+
+#start button {
+    margin: 30px 0 30px 0;
+    font-size: 22px;
+    background-color: purple;
+    border-radius: 8px;
+    color: white;
+    padding: 10px;
+}
+
+div {
+    border: solid;
+}
+
+.btn {
+    font-size: 22px;
+    background-color: purple;
+    border-radius: 8px;
+    color: white;
     display: block;
+    margin: 30px auto 5px; 
+    width: 20%;
+    padding: 10px; 
+    text-align: left;
 }
 
-
-
+.btn:hover {
+    background-color: #BA55D3;
+}
