@@ -71,3 +71,9 @@ div {
 .btn:hover {
     background-color: #BA55D3;
 }
+
+#feedback {
+    font-style: italic;
+    font-size: 50px;
+    opacity: 80%;
+}

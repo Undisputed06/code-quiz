@@ -9,6 +9,7 @@ let submitBtn = document.querySelector('.submit-btn')
 
 let timer = 75; 
 let counter = 0;
+let startTime;
 let questionIndex =0;
 
 
@@ -19,7 +20,7 @@ var onClickHandler = function(event){
     switch(targetEl){
         case "start-btn":
             startQuiz();
-        break;
+            break;
     }
 
     // if(targetEl.matches("#start-btn")){
@@ -94,8 +95,6 @@ var createQuestion = function(){
     });
 }
 
-
-
 var answerQuestion = function(){
         if(this.value !== allQuestions[counter].answer){
             timer -= 10;
@@ -103,15 +102,16 @@ var answerQuestion = function(){
                 timer =0
         }
         timer.textContent = 'Time:  ' + timer;
-            showAnswerEl.textContent = "Incorrect";
+            showAnswerEl.textContent = "Incorrect!";
         }
         else{
-            showAnswerEl.textContent = "Correct";
+            showAnswerEl.textContent = "Correct!";
         }
         counter++
-       
         if(counter === allQuestions.length){
-            console.log('gameover')
+            // console.log(counter)
+            // console.log(allQuestions.length)
+            gameOver();
         }else {
             createQuestion();
         }
@@ -128,6 +128,13 @@ var countDown = function(){
             timeEl.textContent = "Time: " + timer;
         }
     },1000)  
+}
+
+var gameOver = function() {
+    clearInterval(startTime);
+    document.getElementById("quiz-question").style.display = "none";
+    document.getElementById("scoring").style.display = "block";
+    document.getElementById("score").textContent = "Your score is " + timer;
 }
 
 document.addEventListener("click", onClickHandler)
