@@ -1,19 +1,12 @@
-let questionsEl = document.querySelector("#quiz-question")
 let questionTitle = document.querySelector("#question-title")
 let questionOptions = document.querySelector("#options")
-let questionDiv = document.createElement("div");
 let showAnswerEl = document.querySelector('#feedback')
 let timeEl = document.querySelector("#timer")
-let startDiv = document.querySelector("#start")
-let submitBtn = document.querySelector('#submit-btn')
 let initial = document.querySelector('#initials')
-
 
 let timer = 75; 
 let counter = 0;
 let startTime;
-let questionIndex =0;
-
 
 
 var onClickHandler = function(event){
@@ -27,21 +20,7 @@ var onClickHandler = function(event){
             save();
             break;
     }
-
-    // if(targetEl.matches("#start-btn")){
-    //     countDown();
-    //     createQuestion(targetEl)
-    // }
-    // else if(targetEl.matches(".btn")){
-    //     answerQuestion(targetEl)
-    // }
-    
-        
-        // console.log(targetEl)
     }
-
-   
-
 
 let allQuestions = [
     {
