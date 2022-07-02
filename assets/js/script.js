@@ -2,8 +2,11 @@ let questionsEl = document.querySelector("#quiz-question")
 let questionTitle = document.querySelector("#question-title")
 let questionOptions = document.querySelector("#options")
 let questionDiv = document.createElement("div");
+let showAnswerEl = document.querySelector('#feedback')
 let timeEl = document.querySelector("#timer")
 let startDiv = document.querySelector("#start")
+let submitBtn = document.querySelector('.submit-btn')
+
 let timer = 75; 
 let counter = 0;
 let questionIndex =0;
@@ -63,48 +66,55 @@ let allQuestions = [
 ]
 
 const startQuiz = () => {
+    start.style.display ="none";
     countDown();
     createQuestion();
+    document.getElementById("quiz-question").style.display = "block";
 }
 
 var createQuestion = function(){
-        //clear question content
-        questionTitle.textContent = "";
-        questionOptions.textContent="";
+    //clear question content
+    questionTitle.textContent = "";
+    questionOptions.textContent="";
 
-        let title = document.createElement("h3")
-        //get currrent Questions from allQuestions array
-        let currentQuestion =  allQuestions[counter]
-        title.textContent = allQuestions.question;
-        questionTitle.append(title);
+    let title = document.createElement("h3")
+    //get currrent Questions from allQuestions array
+    let currentQuestion =  allQuestions[counter]
+    title.textContent = currentQuestion.question;
+    questionTitle.append(title);
 
-        currentQuestion.choices.forEach(function (choice, i){
+    currentQuestion.choices.forEach(function (choice, i){
 
-            let questionBtns = document.createElement("button");
-            questionBtns.className ="btn";
-            questionBtns.setAttribute("value", choice);
-            questionBtns.textContent = [i +1] + ".  " + choice;
-            questionOptions.append(questionBtns);
-        });
-
+        let questionBtns = document.createElement("button");
+        questionBtns.className ="btn";
+        questionBtns.setAttribute("value", choice);
+        questionBtns.textContent = [i +1] + ".  " + choice;
+        questionOptions.append(questionBtns);
+        questionBtns.onclick = answerQuestion
+    });
 }
 
 
-var answerQuestion = function(targetEl){
-    let buttonText = targetEl.textContent.slice(4);
-    console.log(buttonText)
-    console.log(allQuestionsObj[0].answer)
-    
-        if(buttonText === allQuestionsObj[0].answer){
-            console.log("correct")
+
+var answerQuestion = function(){
+        if(this.value !== allQuestions[counter].answer){
+            timer -= 10;
+            if (timer < 0){
+                timer =0
+        }
+        timer.textContent = 'Time:  ' + timer;
+            showAnswerEl.textContent = "Incorrect";
         }
         else{
-            console.log("incorrect")
+            showAnswerEl.textContent = "Correct";
         }
-        questionIndex++
-        createQuestion(allQuestionsObj)
-    // }
-     
+        counter++
+       
+        if(counter === allQuestions.length){
+            console.log('gameover')
+        }else {
+            createQuestion();
+        }
 }
 
 var countDown = function(){
