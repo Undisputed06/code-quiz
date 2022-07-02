@@ -1,4 +1,6 @@
 let questionsEl = document.querySelector("#quiz-question")
+let questionTitle = document.querySelector("#question-title")
+let questionOptions = document.querySelector("#options")
 let questionDiv = document.createElement("div");
 let timeEl = document.querySelector("#timer")
 let startDiv = document.querySelector("#start")
@@ -32,7 +34,7 @@ var onClickHandler = function(event){
    
 
 
-let allQuestionsObj = [
+let allQuestions = [
     {
         question: "Common used data types DO not include:",
         choices: ["strings", "booleans", "alerts", "numbers"],
@@ -62,31 +64,30 @@ let allQuestionsObj = [
 
 const startQuiz = () => {
     countDown();
+    createQuestion();
 }
 
-var createQuestion = function(targetEl){
-        startDiv.classList.add("hide")
-        let question = document.createElement("h1");
-        question.textContent = allQuestionsObj[counter].question;
-        question.setAttribute("data-id", [counter]);
-        questionDiv.appendChild(question);
-        questionsEl.appendChild(questionDiv);
-        console.log(questionDiv)
-        createButtons(allQuestionsObj);
-}
+var createQuestion = function(){
+        //clear question content
+        questionTitle.textContent = "";
+        questionOptions.textContent="";
 
-var createButtons = function(allQuestionsObj){
-    allQuestionsObj[questionIndex].choices.forEach(choice => {
-        let questionBtns = document.createElement("button");
-        questionBtns.textContent = [counter +1] + ".  " + choice;
-        questionBtns.setAttribute("data-id", questionIndex);
-        questionBtns.className ="btn";
-        questionDiv.appendChild(questionBtns);
-        questionsEl.appendChild(questionDiv)
-        counter++
-    })
+        let title = document.createElement("h3")
+        //get currrent Questions from allQuestions array
+        let currentQuestion =  allQuestions[counter]
+        title.textContent = allQuestions.question;
+        questionTitle.append(title);
+
+        currentQuestion.choices.forEach(function (choice, i){
+
+            let questionBtns = document.createElement("button");
+            questionBtns.className ="btn";
+            questionBtns.setAttribute("value", choice);
+            questionBtns.textContent = [i +1] + ".  " + choice;
+            questionOptions.append(questionBtns);
+        });
+
 }
-    
 
 
 var answerQuestion = function(targetEl){
