@@ -5,7 +5,9 @@ let questionDiv = document.createElement("div");
 let showAnswerEl = document.querySelector('#feedback')
 let timeEl = document.querySelector("#timer")
 let startDiv = document.querySelector("#start")
-let submitBtn = document.querySelector('.submit-btn')
+let submitBtn = document.querySelector('#submit-btn')
+let initial = document.querySelector('#initials')
+
 
 let timer = 75; 
 let counter = 0;
@@ -20,6 +22,9 @@ var onClickHandler = function(event){
     switch(targetEl){
         case "start-btn":
             startQuiz();
+            break;
+        case "submit-btn":
+            save();
             break;
     }
 
@@ -109,8 +114,6 @@ var answerQuestion = function(){
         }
         counter++
         if(counter === allQuestions.length){
-            // console.log(counter)
-            // console.log(allQuestions.length)
             gameOver();
         }else {
             createQuestion();
@@ -128,6 +131,21 @@ var countDown = function(){
             timeEl.textContent = "Time: " + timer;
         }
     },1000)  
+}
+
+var save = function() {
+    var initials = initial.value.trim();
+
+    var highscore = JSON.parse(window.localStorage.getItem("highscores")) || [];
+
+    var newHighScore = {
+        score: timer,
+        initials: initials
+    };
+
+    highscore.push(newHighScore);
+    window.localStorage.setItem("highscores", JSON.stringify(highscore));
+    window.location.href ="highscores.html";
 }
 
 var gameOver = function() {
